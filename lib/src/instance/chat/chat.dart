@@ -180,6 +180,7 @@ interface class OpenAIChat implements OpenAIChatBase {
     int? seed,
     String? user,
     http.Client? client,
+    bool includeUsage = false,
   }) {
     return OpenAINetworkingClient.postStream<OpenAIStreamChatCompletionModel>(
       to: BaseApiUrlBuilder.build(endpoint),
@@ -201,6 +202,7 @@ interface class OpenAIChat implements OpenAIChatBase {
         if (user != null) "user": user,
         if (seed != null) "seed": seed,
         if (responseFormat != null) "response_format": responseFormat,
+        if (includeUsage) "stream_options": {"include_usage": true},
       },
       onSuccess: (Map<String, dynamic> response) {
         return OpenAIStreamChatCompletionModel.fromMap(response);
