@@ -1,8 +1,17 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import '../../../../dart_openai.dart';
 
 abstract class CreateInterface {
+  Future<Uint8List> createSpeechBytes({
+    required String model,
+    required String input,
+    required String voice,
+    OpenAIAudioSpeechResponseFormat? responseFormat,
+    double? speed,
+  });
+
   Future<File> createSpeech({
     required String model,
     required String input,
